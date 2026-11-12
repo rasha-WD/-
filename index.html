@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مهامي | إدارة المهام</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+        <h2 class="logo">
+            <img src="logo.png" alt="أيقونة مهامي"></h2>
+
+        <nav>
+             <button class="nav-btn" data-view="year"> التقويم السنوي</button>
+            <button class="nav-btn active" data-view="month"> التقويم الشهري</button>
+            <button class="nav-btn" data-view="week"> التقويم الأسبوعي</button>
+            <button class="nav-btn" data-view="day"> التقويم اليومي</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>نظّم وقتك، أنجز مهامك</i></p>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h1>مرحباً بك في مهامي </h1>
+                <p>خطط ليومك وحقق أهدافك</p>
+            </div>
+
+            <button id="addTaskBtn" class="add-btn">
+                ＋ إضافة مهمة جديدة
+            </button>
+        </header>
+
+        <section class="stats">
+            <div class="stat-card">
+                <span>إجمالي المهام</span>
+                <h2 id="totalTasks">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>المهام المكتملة</span>
+                <h2 id="completedTasks">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>المهام المتبقية</span>
+                <h2 id="pendingTasks">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>المهام المتأخرة</span>
+                <h2 id="lateTasks">0</h2>
+            </div>
+        </section>
+
+        <section class="calendar-section">
+
+            <div class="calendar-header">
+                <button id="prevBtn">❯</button>
+                <h2 id="calendarTitle"></h2>
+                <button id="nextBtn">❮</button>
+            </div>
+
+            <div class="view-switch">
+                 <button data-view="year" class="view-btn">سنوي</button>
+                 <button data-view="month" class="view-btn active">شهري</button>
+                <button data-view="week" class="view-btn">أسبوعي</button>
+                <button data-view="day" class="view-btn">يومي</button>
+            </div>
+
+            <div id="calendar" class="calendar"></div>
+
+        </section>
+
+        <section class="tasks-section">
+
+            <h2>قائمة المهام</h2>
+
+            <div class="filters">
+
+                <select id="durationFilter">
+                    <option value="all">كل المدد</option>
+                    <option value="today">اليوم</option>
+                    <option value="week">هذا الأسبوع</option>
+                    <option value="month">هذا الشهر</option>
+                    <option value="overdue">المهام المتأخرة</option>
+                </select>
+
+                <select id="priorityFilter">
+                    <option value="all">كل الأهميات</option>
+                    <option value="high">عالية</option>
+                    <option value="medium">متوسطة</option>
+                    <option value="low">منخفضة</option>
+                </select>
+
+                <select id="sortFilter">
+                    <option value="asc">الأقرب موعداً</option>
+                    <option value="desc">الأبعد موعداً</option>
+                </select>
+
+            </div>
+
+            <div id="taskList"></div>
+
+        </section>
+
+    </main>
+</div>
+
+<!-- نافذة إضافة مهمة -->
+
+<div id="taskModal" class="modal">
+
+    <div class="modal-content">
+
+        <button id="closeModal" class="close-btn">×</button>
+
+        <h2>إضافة مهمة جديدة <i class="bi bi-stars"></i></h2>
+
+        <form id="taskForm">
+
+            <label>اسم المهمة</label>
+            <input type="text" id="taskName" required
+                   placeholder="اكتبي اسم المهمة">
+
+            <label>وصف المهمة</label>
+            <textarea id="taskDescription"
+                      placeholder="تفاصيل المهمة..."></textarea>
+
+            <label>تاريخ التسليم</label>
+            <input type="date" id="taskDate" required>
+
+            <label>وقت التسليم</label>
+            <input type="time" id="taskTime" required>
+
+            <label>أهمية المهمة</label>
+            <select id="taskPriority">
+                <option value="high">عالية 🔴</option>
+                <option value="medium" selected>متوسطة 🟡</option>
+                <option value="low">منخفضة 🟢</option>
+            </select>
+
+            <label>مدة المهمة</label>
+            <input type="number" id="taskDuration"
+                   min="1" value="1" required>
+
+            <select id="durationUnit">
+                <option value="hours">ساعات</option>
+                <option value="days">أيام</option>
+            </select>
+
+            <button type="submit" class="save-btn">
+                حفظ المهمة
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
